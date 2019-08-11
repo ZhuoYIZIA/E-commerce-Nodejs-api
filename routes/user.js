@@ -27,5 +27,9 @@ router.patch('/EditCart/:cartId',isAuth , authCtr.EditCart);
 
 router.delete('/DelectCart/:cartId',isAuth , authCtr.DelectCart);
 
+router.patch('/resetPwd',isAuth ,authCtr.resetPwd);
+
+router.patch('/forgetPwd',isAuth ,authCtr.forgetPwd);
+
 
 module.exports = router;

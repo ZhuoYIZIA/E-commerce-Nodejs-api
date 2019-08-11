@@ -205,3 +205,37 @@ exports.DelectCart = async (req, res, next) => {
     }
 };
 
+exports.resetPwd = async (req, res, next) => {
+    const oldpwd = req.body.oldpwd;
+    const newPwd = req.body.newPwd;
+    const userId = req.userId;
+    try {
+        const user = await User.findById(userId);
+        const isOldPwd = await bcrypt.compare(oldpwd, user.password);
+        if (!isOldPwd) {
+            const error = new Error('old password wroung.');
+            error.statusCode = 422;
+            throw error;
+        }
+        if (oldpwd === newPwd) {
+            const error = new Error('New and old password are same.');
+            error.statusCode = 422;
+            throw error;
+        }
+        const hashPwd = await bcrypt.hash(newPwd, 12);
+        user.password = hashPwd;
+        await user.save();
+        res.status(200).json({
+            message: 'Update successfully'
+        });
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+};
+
+exports.forgetPwd = async (req, res, next) => {
+
+};
