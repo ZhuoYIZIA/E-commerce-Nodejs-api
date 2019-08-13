@@ -14,3 +14,11 @@ npm start
 
 ## Package
 
+⋅⋅* bcryptjs
+⋅⋅* dotenv
+⋅⋅* express
+⋅⋅* jsonwebtoken
+⋅⋅* mongoose
+⋅⋅* nodemon
+⋅⋅* stripe
+⋅⋅* nodemailer
