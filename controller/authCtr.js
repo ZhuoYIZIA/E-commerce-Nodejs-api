@@ -16,9 +16,10 @@ exports.signup = async (req, res, next) => {
         error.data = errors.array();
         throw error;
     }
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
+    const data = bcrypt.decodeBase64(req.body.data);
+    const name = data.name;
+    const email = data.email;
+    const password = data.password;
     try {
         const isEmail = await User.findOne({
             email: email
@@ -48,9 +49,10 @@ exports.signup = async (req, res, next) => {
 };
 
 exports.login = async (req, res, next) => {
+    const data = bcrypt.decodeBase64(req.body.data);
+    const email = data.email;
+    const password = data.password;
     try {
-        const email = req.body.email;
-        const password = req.body.password;
         const user = await User.findOne({
             email: email
         });
@@ -117,7 +119,7 @@ exports.EditProfile = async (req, res, next) => {
 
 exports.AddCart = async (req, res, next) => {
     const productId = req.params.productId;
-    const quantity = req.body.quantity;
+    const quantity = req.body.quantity || 1;
     try {
         const product = Product.findOne({
             _id: productId
@@ -206,8 +208,9 @@ exports.DelectCart = async (req, res, next) => {
 };
 
 exports.resetPwd = async (req, res, next) => {
-    const oldpwd = req.body.oldpwd;
-    const newPwd = req.body.newPwd;
+    const data = bcrypt.decodeBase64(req.body.data);
+    const oldpwd = data.oldpwd;
+    const newPwd = data.newPwd;
     const userId = req.userId;
     try {
         const user = await User.findById(userId);
