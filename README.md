@@ -14,13 +14,11 @@ npm start
 
 ## Package
 
-⋅⋅* Unordered sub-list. 
-
-⋅⋅* bcryptjs
-⋅⋅* dotenv
-⋅⋅* express
-⋅⋅* jsonwebtoken
-⋅⋅* mongoose
-⋅⋅* nodemon
-⋅⋅* stripe
-⋅⋅* nodemailer
+* bcryptjs
+* dotenv
+* express
+* jsonwebtoken
+* mongoose
+* nodemon
+* stripe
+* nodemailer
