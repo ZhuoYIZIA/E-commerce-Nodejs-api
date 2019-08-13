@@ -25,4 +25,4 @@ npm start
 
 ## API document
 
-[ling](https://www.showdoc.cc/461308774384887)
+[link](https://www.showdoc.cc/461308774384887)
