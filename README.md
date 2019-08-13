@@ -17,8 +17,7 @@ npm start
 ### auth
 | API | json | Description |
 | --- | --- |
-| `/login` | `{data: { email:test@email.com, password:test }` } | login email and password use crypt base64 ex. 
-`{ data : asdfaxhjkhfhwasdhjkfe }` |
+| `/login` | `{data: { email:test@email.com, password:test }` } | login email and password use crypt base64 ex.`{ data : asdfaxhjkhfhwasdhjkfe }` |
 | `/signup` | `{data: { email:test@email.com, password:test, name:test }` | signup email, password,name use crypt base64 like login |
 | `/EditProfile` | `{name:String, address:String, phone:Number}` | edit your profile |
 | `/AddCart/:productId` | `{ quantity: Number }` | add product to cart |
