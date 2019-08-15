@@ -2,6 +2,7 @@ const User = require('../models/User');
 const Product = require('../models/Product');
 const Order = require('../models/Order');
 const stripe = require('stripe')(process.env.STRIPE_KEY);
+const Invoice = require('../models/Invoice');
 
 exports.getOrders = async (req, res, next) => {
     const userId = req.userId;
@@ -51,7 +52,8 @@ exports.create = async (req, res, next) => {
             user: {
                 email: user.email,
                 userId: user._id
-            }
+            },
+            totalPrice: totalPrice
         });
 
         const charges = await stripe.charges.create({
@@ -63,9 +65,22 @@ exports.create = async (req, res, next) => {
                 'order_id': order._id.toString()
             }
         });
+        const invoicesData = await stripe.invoiceItems.create({
+            customer = charges.customer,
+            amount: totalPrice,
+            currency: 'TWD',
+            description: 'Demo'
+        });
 
-        await order.save();
+        const invoiceItem = new Invoice({
+            items: invoicesData
+        });
+
+        order.invoiceId = invoiceItem._id;
+
         user.cart = [];
+        await invoiceItem.save();
+        await order.save();
         await user.save();
 
         res.status(200).json({

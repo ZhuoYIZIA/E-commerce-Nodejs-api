@@ -24,6 +24,15 @@ const orderSchema = new Schema({
             required: true,
             ref: 'User'
         }
+    },
+    totalPrice: {
+        type: Number,
+        required: true
+    },
+    invoiceId: {
+        type: String,
+        required: true,
+        ref: 'Invoice'
     }
 });
 

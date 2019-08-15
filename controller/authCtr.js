@@ -74,6 +74,7 @@ exports.login = async (req, res, next) => {
         }, process.env.API_KEY, {
             expiresIn: '1h'
         });
+        
         res.status(200).json({
             token: token,
             userId: user._id.toString(),
