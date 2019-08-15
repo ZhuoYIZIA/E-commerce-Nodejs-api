@@ -65,18 +65,18 @@ exports.create = async (req, res, next) => {
                 'order_id': order._id.toString()
             }
         });
-        const invoicesData = await stripe.invoiceItems.create({
+        const invoiceItems = await stripe.invoiceItems.create({
             customer = charges.customer,
             amount: totalPrice,
             currency: 'TWD',
             description: 'Demo'
         });
 
-        const invoiceItem = new Invoice({
-            items: invoicesData
+        const invoice = new Invoice({
+            items: invoiceItems
         });
 
-        order.invoiceId = invoiceItem._id;
+        order.invoiceId = invoice._id;
 
         user.cart = [];
         await invoiceItem.save();
