@@ -56,30 +56,30 @@ exports.create = async (req, res, next) => {
             totalPrice: totalPrice
         });
 
-        const charges = await stripe.charges.create({
-            amount: totalPrice,
-            currency: 'TWD',
-            description: 'demo',
-            source: token,
-            metadata: {
-                'order_id': order._id.toString()
-            }
-        });
-        const invoiceItems = await stripe.invoiceItems.create({
-            customer = charges.customer,
-            amount: totalPrice,
-            currency: 'TWD',
-            description: 'Demo'
-        });
+        // const charges = await stripe.charges.create({
+        //     amount: totalPrice,
+        //     currency: 'TWD',
+        //     description: 'demo',
+        //     source: token,
+        //     metadata: {
+        //         'order_id': order._id.toString()
+        //     }
+        // });
+        // const invoiceItems = await stripe.invoiceItems.create({
+        //     customer = charges.customer,
+        //     amount: totalPrice,
+        //     currency: 'TWD',
+        //     description: 'Demo'
+        // });
 
-        const invoice = new Invoice({
-            items: invoiceItems
-        });
+        // const invoice = new Invoice({
+        //     items: invoiceItems
+        // });
 
-        order.invoiceId = invoice._id;
+        // order.invoiceId = invoice._id;
 
         user.cart = [];
-        await invoiceItem.save();
+        // await invoiceItem.save();
         await order.save();
         await user.save();
 
