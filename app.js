@@ -49,6 +49,9 @@ mongoose.connect(process.env.MONGODB_URI, {
     .then(() => {
         console.log('start run node');
         app.listen(process.env.PORT);
+        module.exports = {
+            app
+        };
     })
     .catch(err => {
         console.log(err);
